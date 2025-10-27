@@ -6,6 +6,7 @@ from opentelemetry.sdk.trace.export import (
     ConsoleSpanExporter,
 )
 from opentelemetry.sdk.resources import Resource
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
 # Resource setup to specify service information
 myResourceConfig = Resource(attributes={
@@ -18,7 +19,11 @@ myResourceConfig = Resource(attributes={
 
 # OTEL Tracing setup
 provider = TracerProvider(resource=myResourceConfig)
-processor = BatchSpanProcessor(ConsoleSpanExporter())
+
+COLLECTOR_ENDPOINT = "127.0.0.1"
+COLLECTOR_GPRC_PORT = 6004
+
+processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=f"http://{COLLECTOR_ENDPOINT}:{COLLECTOR_GPRC_PORT}"))
 provider.add_span_processor(processor)
 
 # set the global tracer provider
@@ -48,7 +53,8 @@ def add_numbers(first, second) -> None:
             "duration": 2,
             "additional_message": "complete"
             },
-        timestamp=time.time())
+        # timestamp in nanoseconds or else OTEL exporter fails (expects integer)
+        timestamp=int(time.time() * 1e9))
     
 
     return first + second
