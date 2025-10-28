@@ -20,8 +20,9 @@ myResourceConfig = Resource(attributes={
 # OTEL Tracing setup
 provider = TracerProvider(resource=myResourceConfig)
 
-COLLECTOR_ENDPOINT = "127.0.0.1"
-COLLECTOR_GPRC_PORT = 6004
+COLLECTOR_ENDPOINT = "0.0.0.0"
+COLLECTOR_GPRC_PORT = 4317
+
 
 processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=f"http://{COLLECTOR_ENDPOINT}:{COLLECTOR_GPRC_PORT}"))
 provider.add_span_processor(processor)
@@ -60,5 +61,5 @@ def add_numbers(first, second) -> None:
     return first + second
 
 if __name__ == "__main__":
-    result = add_numbers(3, 5)
+    result = add_numbers(12, 9)
     print(f"The sum of 3 and 5 is: {result}")   
