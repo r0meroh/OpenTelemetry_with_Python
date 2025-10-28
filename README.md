@@ -7,7 +7,7 @@
 [opentelemetry-sdk == 1.38.0](https://pypi.org/project/opentelemetry-sdk/)
 
 ### Traces produced
-[traces](images/traces.png)
+![traces](images/traces.png)
 
 #### Spans in a trace
-[spans](images/oneSpan.png)
+![spans](images/oneSpan.png)
