@@ -24,7 +24,7 @@ COLLECTOR_ENDPOINT = "0.0.0.0"
 COLLECTOR_GPRC_PORT = 4317
 
 
-processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=f"http://{COLLECTOR_ENDPOINT}:{COLLECTOR_GPRC_PORT}"))
+processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=f"{COLLECTOR_ENDPOINT}:{COLLECTOR_GPRC_PORT}", insecure=True))
 provider.add_span_processor(processor)
 
 # set the global tracer provider
