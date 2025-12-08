@@ -9,16 +9,11 @@ exporters:
     verbosity: detailed
 
   otlp:
-    endpoint: "otelcol:4317"
+    endpoint: "jaeger:4317"
     tls:
       insecure: true
-  jaeger:
-    endpoint: "jaeger:14250"
-    tls:
-      insecure: true   
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [otlp, debug, jaeger]
-
+      exporters: [otlp, debug]

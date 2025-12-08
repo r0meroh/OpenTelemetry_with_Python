@@ -20,7 +20,7 @@ myResourceConfig = Resource(attributes={
 # OTEL Tracing setup
 provider = TracerProvider(resource=myResourceConfig)
 
-COLLECTOR_ENDPOINT = "0.0.0.0"
+COLLECTOR_ENDPOINT = "localhost"
 COLLECTOR_GPRC_PORT = 4317
 
 
